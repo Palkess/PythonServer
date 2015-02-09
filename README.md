@@ -1,4 +1,4 @@
 # PythonServer
 Server-script written in Python, PEP8
-#wawdawdawdwd
-Altered
+  
+Comes with files to test the transfer between the server and client.
