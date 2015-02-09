@@ -2,45 +2,16 @@
 
 import socket
 
-class Client(object):
 
-    #
-    # @params
-    # TCP_IP      -- IP of the target we want to connect to
-    # TCP_PORT    -- Port of the target we want to connect to
-    # BUFFER_SIZE -- Our buffersize for receiving data
-    #
-    def __init__(self, TCP_IP, TCP_PORT, BUFFER_SIZE):
-        self.TCP_IP = TCP_IP
-        self.TCP_PORT = TCP_PORT
-        self.BUFFER_SIZE = BUFFER_SIZE
-        self.ANSWERS = []
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+TCP_IP = '192.168.0.12'
+TCP_PORT = 5005
+BUFFER_SIZE = 1024
+MESSAGE = "Hello, World!"
 
-    #
-    # Setup the connection with our socket
-    #
-    def connect(self):
-        self.s.connect((self.TCP_IP, self.TCP_PORT))
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((TCP_IP, TCP_PORT))
+s.send(MESSAGE)
+data = s.recv(BUFFER_SIZE)
+s.close()
 
-    #
-    # Send given message through the connection
-    #
-    def send(self, MESSAGE):
-        self.s.sendall(MESSAGE)
-
-    #
-    # Recieve data from the connected socket
-    # to self.ANSWER and return the recieved
-    # data.
-    #
-    def recieve(self):
-        data = self.s.recv(self.BUFFER_SIZE)
-        self.ANSWERS.append(data)
-        return str(data)
-
-    #
-    # Close the connected socket
-    #
-    def close(self):
-        self.s.close()
+print "received data:", data
