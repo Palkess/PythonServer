@@ -24,10 +24,6 @@ while 1:
     except IOError as e:
         print "I/O error({0}): {1}".format(e.errno, e.strerror)
 
-#Save "blocks" of data in a list with the size of buffersize
-#FIX---------------------------------
-#Wont recieve "block" that's smaller than the recv(buffersize) on serverside
-#Cuts off if the remaining data isn't the size of buffersize
 verboseCount = 1
 while 1:
     l = f.read(buffersize)
@@ -41,17 +37,17 @@ for x in range(0, len(listData)):
     print 'Storlek_' + str(x) + ':' + str(len(listData[x]))
 
 if len(listData) > 0:
-    #Send the length of the following data-transmission
+    # Send the length of the following data-transmission
     connection.send(str(len(listData)))
     recvData = connection.recieve()
 
     print "Length: " + str(len(listData))
 
-    #If we received the same length from
-    #the server we can begin the data-transmission
+    # If we received the same length from
+    # the server we can begin the data-transmission
     if recvData == str(len(listData)):
 
-        #Send each "block" of data
+        # Send each "block" of data
         for x in range(0, int(recvData)):
             connection.send(listData[x])
             recvData = connection.recieve()
@@ -63,7 +59,6 @@ if len(listData) > 0:
                 print recvData
                 break
 
-            
         connection.send("End")
         print connection.recieve()
     else:

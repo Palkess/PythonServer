@@ -9,14 +9,14 @@ from thread import *
 
 class Server(object):
 
-    def __init__(self, verboseMode = 0):
+    def __init__(self, verboseMode=0):
         self.TCP_IP = ''
         self.TCP_PORT = 5005
         self.BUFFER_SIZE = 4096
         self.file_counter = 1
         self.verbose = verboseMode
 
-    #--------------------------Helper-functions
+    # --------------------------Helper-functions
     def currentTime(self):
         return str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
@@ -34,23 +34,23 @@ class Server(object):
             welcomeMessage += ' Your connection is now ready to be used!\n'
             conn.sendall(welcomeMessage)
 
-            #Recieve length of following transmission
+            # Recieve length of following transmission
             data = conn.recv(self.BUFFER_SIZE)
-            #Send back a confirmation
+            # Send back a confirmation
             conn.sendall(data)
 
             # If no data was recieved we raise an exception
             if not data:
                 raise Exception('No data recieved')
 
-            #If we received a length we start receiving the transmission
+            # If we received a length we start receiving the transmission
             if data > 0:
                 length = int(data)
 
                 f = open('file_' + str(self.file_counter) + '.txt', 'wb')
                 self.file_counter += 1
 
-                #For verbose purpose
+                # For verbose purpose
                 print 'Length: ' + str(length)
 
                 for x in range(0, length):
@@ -59,9 +59,7 @@ class Server(object):
                     f.write(data)
 
                     conn.sendall(data)
-                    
                     print str(x)
-
 
                 # Saves a reply for the client to receive
                 reply = "Your file has been saved to " + f.name
