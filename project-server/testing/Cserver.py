@@ -9,11 +9,12 @@ from thread import *
 
 class Server(object):
 
-    def __init__(self):
+    def __init__(self, verboseMode = 0):
         self.TCP_IP = ''
         self.TCP_PORT = 5005
         self.BUFFER_SIZE = 4096
         self.file_counter = 1
+        self.verbose = verboseMode
 
     #--------------------------Helper-functions
     def currentTime(self):
