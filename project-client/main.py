@@ -30,8 +30,8 @@ while 1:
         break
     listData.append(l)
     if verbose:
-    	print 'Added: ' + str(verboseCount)
-    	verboseCount += 1
+        print 'Added: ' + str(verboseCount)
+        verboseCount += 1
 if verbose:
     for x in range(0, len(listData)):
         print 'Storlek_' + str(x) + ':' + str(len(listData[x]))
@@ -41,7 +41,7 @@ if len(listData) > 0:
     connection.send(str(len(listData)))
     recvData = connection.recieve()
     if verbose:
-    	print "Length: " + str(len(listData))
+        print "Length: " + str(len(listData))
 
     # If we received the same length from
     # the server we can begin the data-transmission

@@ -59,7 +59,7 @@ class Server(object):
                     if self.verbose:
                         print 'Length received: ' + str(len(data))
                         print str(x)
-                        
+
                     f.write(data)
                     conn.sendall(data)
 
