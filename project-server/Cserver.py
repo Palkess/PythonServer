@@ -51,15 +51,17 @@ class Server(object):
                 self.file_counter += 1
 
                 # For verbose purpose
-                print 'Length: ' + str(length)
+                if self.verbose:
+                    print 'Length: ' + str(length)
 
                 for x in range(0, length):
                     data = conn.recv(self.BUFFER_SIZE)
-                    print 'Length received: ' + str(len(data))
+                    if self.verbose:
+                        print 'Length received: ' + str(len(data))
+                        print str(x)
+                        
                     f.write(data)
-
                     conn.sendall(data)
-                    print str(x)
 
                 # Saves a reply for the client to receive
                 reply = 'Your file has been saved to ' + f.name

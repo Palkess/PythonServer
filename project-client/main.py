@@ -8,9 +8,8 @@ buffersize = 4096
 connection = client.Client(tcp_ip, tcp_port, buffersize)
 myMessage = ''
 listData = []
+verbose = 0
 l = ''
-
-print str(len(listData))
 
 connection.connect()
 print "Connection established to " + str(tcp_ip) + ":" + str(tcp_port)
@@ -30,18 +29,19 @@ while 1:
     if not l:
         break
     listData.append(l)
-    print 'Added: ' + str(verboseCount)
-    verboseCount += 1
-
-for x in range(0, len(listData)):
-    print 'Storlek_' + str(x) + ':' + str(len(listData[x]))
+    if verbose:
+    	print 'Added: ' + str(verboseCount)
+    	verboseCount += 1
+if verbose:
+    for x in range(0, len(listData)):
+        print 'Storlek_' + str(x) + ':' + str(len(listData[x]))
 
 if len(listData) > 0:
     # Send the length of the following data-transmission
     connection.send(str(len(listData)))
     recvData = connection.recieve()
-
-    print "Length: " + str(len(listData))
+    if verbose:
+    	print "Length: " + str(len(listData))
 
     # If we received the same length from
     # the server we can begin the data-transmission
