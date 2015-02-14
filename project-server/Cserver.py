@@ -24,8 +24,7 @@ class Server(object):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.bind((self.TCP_IP, self.TCP_PORT))
         self.s.listen(10)
-        current = self.currentTime()
-        print current + ' Server started!'
+        print '%s Server started!' % (self.currentTime())
 
     def listen(self):
 
@@ -47,42 +46,40 @@ class Server(object):
             if data > 0:
                 length = int(data)
 
-                f = open('file_' + str(self.file_counter) + '.txt', 'wb')
+                f = open('file_%s.txt' % (str(self.file_counter)), 'wb')
                 self.file_counter += 1
 
                 # For verbose purpose
                 if self.verbose:
-                    print 'Length: ' + str(length)
+                    print 'Length: %s' % (str(length))
 
                 for x in range(0, length):
                     data = conn.recv(self.BUFFER_SIZE)
                     if self.verbose:
-                        print 'Length received: ' + str(len(data))
+                        print 'Length received: %s' % (str(len(data)))
                         print str(x)
 
                     f.write(data)
                     conn.sendall(data)
 
                 # Saves a reply for the client to receive
-                reply = 'Your file has been saved to ' + f.name
+                reply = 'Your file has been saved to %s' % (f.name)
                 f.close
                 conn.sendall(reply)
 
             # Close the connection and print out message
             addr = conn.getpeername()
             conn.close()
-            print self.currentTime() + ' Connection with ' + \
-                addr[0] + ':' + str(addr[1]) + ' closed'
+            print '%s Connection with %s:%s closed' % (self.currentTime(), addr[0], str(addr[1]))
         # End Clientthread()
 
         def process():
 
-            print self.currentTime() + ' Listening for connections'
+            print '%s Listening for connections' % (self.currentTime())
 
             while 1:
                 conn, addr = self.s.accept()
-                print self.currentTime() + ' Connection address:' + \
-                    addr[0] + ":" + str(addr[1])
+                print '%s Connection address: %s:%s' % (self.currentTime(), addr[0], str(addr[1]))
 
                 # Start a thread with the connection
                 start_new_thread(clientthread, (conn,))
@@ -93,4 +90,4 @@ class Server(object):
 
     def close(self):
         self.s.close()
-        print self.currentTime() + ' Socket closed'
+        print '%s Socket closed' % (self.currentTime())

@@ -13,7 +13,7 @@ print 'Type stop or kill to kill the server'
 # Listen to ports
 start_new_thread(server.listen, ())
 
-# Enter stop or exit to stop the server
+# Enter stop or kill to stop the server
 while 1:
     response = raw_input('')
     if response == 'stop' or response == 'kill':

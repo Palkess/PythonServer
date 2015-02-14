@@ -12,7 +12,7 @@ verbose = 0
 l = ''
 
 connection.connect()
-print "Connection established to " + str(tcp_ip) + ":" + str(tcp_port)
+print "Connection established to %s:%s" % (str(tcp_ip), str(tcp_port))
 print connection.recieve()
 
 while 1:
@@ -30,18 +30,18 @@ while 1:
         break
     listData.append(l)
     if verbose:
-        print 'Added: ' + str(verboseCount)
+        print 'Added: %s' % (str(verboseCount))
         verboseCount += 1
 if verbose:
     for x in range(0, len(listData)):
-        print 'Storlek_' + str(x) + ':' + str(len(listData[x]))
+        print 'Storlek_%s:%s' % (str(x), str(len(listData[x])))
 
 if len(listData) > 0:
     # Send the length of the following data-transmission
     connection.send(str(len(listData)))
     recvData = connection.recieve()
     if verbose:
-        print "Length: " + str(len(listData))
+        print "Length: %s" % (str(len(listData)))
 
     # If we received the same length from
     # the server we can begin the data-transmission
@@ -53,13 +53,13 @@ if len(listData) > 0:
             recvData = connection.recieve()
             if recvData != listData[x]:
                 print "Not the same data"
-                print "Message nr. " + str(x)
-                print "Length sent: " + str(len(listData[x]))
-                print "Length received: " + str(len(recvData))
+                print "Message nr.%s " % (str(x))
+                print "Length sent: %s" % (str(len(listData[x])))
+                print "Length received: %s" % (str(len(recvData)))
                 print recvData
                 break
 
-        connection.send("End")
+        connection.send("End")  # wat
         print connection.recieve()
     else:
         print 'Wrong data received: ' + recvData
