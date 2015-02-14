@@ -59,7 +59,6 @@ if len(listData) > 0:
                 print recvData
                 break
 
-        connection.send("End")  # wat
         print connection.recieve()
     else:
         print 'Wrong data received: ' + recvData
