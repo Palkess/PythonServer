@@ -70,7 +70,8 @@ class Server(object):
             # Close the connection and print out message
             addr = conn.getpeername()
             conn.close()
-            print '%s Connection with %s:%s closed' % (self.currentTime(), addr[0], str(addr[1]))
+            print '%s Connection with %s:%s closed' % \
+                (self.currentTime(), addr[0], str(addr[1]))
         # End Clientthread()
 
         def process():
@@ -79,7 +80,8 @@ class Server(object):
 
             while 1:
                 conn, addr = self.s.accept()
-                print '%s Connection address: %s:%s' % (self.currentTime(), addr[0], str(addr[1]))
+                print '%s Connection address: %s:%s' % \
+                    (self.currentTime(), addr[0], str(addr[1]))
 
                 # Start a thread with the connection
                 start_new_thread(clientthread, (conn,))
