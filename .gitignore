@@ -26,6 +26,10 @@
 *.log
 *.sql
 *.sqlite
+
+# Locally generated files #
+###########################
+file_*.txt
  
 # OS generated files #
 ######################
